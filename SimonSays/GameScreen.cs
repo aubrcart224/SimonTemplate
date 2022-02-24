@@ -20,7 +20,7 @@ namespace SimonSays
         //public static Random randNum = new Random();
         //int number = randNum.Next(0, 5);
         int guess = 0;
-        int number = 0;
+        int  number = 0;
         
         
 
@@ -44,41 +44,54 @@ namespace SimonSays
             //TODO: get rand num between 0 and 4 (0, 1, 2, 3) and add to pattern list
             Random randNum = new Random();
             number = randNum.Next(0, 4);
-            //Form1.pattern.Add(number);
-            Form1.pattern.Add(1);
+            Form1.pattern.Add(number);
+            //Form1.pattern.Add(0);
+            //Form1.pattern.Add(3);
+            //Form1.pattern.Add(1);
+            //Form1.pattern.Add(3);
+            //Form1.pattern.Add(2);
+            //Form1.pattern.Add(1);
 
             //TODO: create a for loop that shows each value in the pattern by lighting up approriate button
-            for (int i = 0; i <= Form1.pattern.Count(); i++)
+            for (int i = 0; i < Form1.pattern.Count(); i++)
             {
                 if (Form1.pattern[i] == 0)
                 {
                     greenButton.BackColor= Color.White;
-                    Thread.Sleep(1000);
                     Refresh();
+                    Thread.Sleep(1000);
                     greenButton.BackColor = Color.ForestGreen;
+                    Refresh();
+                    Thread.Sleep(1000);
 
 
                 }
                 else if (Form1.pattern[i] == 1)
                 {
                     blueButton.BackColor = Color.White;
-                    Thread.Sleep(1000);
                     Refresh();
+                    Thread.Sleep(1000);
                     blueButton.BackColor = Color.DarkBlue;
+                    Refresh();
+                    Thread.Sleep(1000);
                 }
                 else if (Form1.pattern[i] == 2)
                 {
                     redButton.BackColor= Color.White;
-                    Thread.Sleep(1000);
                     Refresh();
+                    Thread.Sleep(1000);
                     redButton.BackColor =Color.DarkRed;
+                    Refresh();
+                    Thread.Sleep(1000);
                 }
                 else if (Form1.pattern[i] == 3)
                 {
                     yellowButton.BackColor= Color.White;
-                    Thread.Sleep(1000);
                     Refresh();
+                    Thread.Sleep(1000);
                     yellowButton.BackColor = Color.Goldenrod;
+                    Refresh();
+                    Thread.Sleep(1000);
                 }
                 
 
@@ -107,13 +120,15 @@ namespace SimonSays
             // check to see if we are at the end of the pattern. If so:
             // call ComputerTurn() method
             // else call GameOver method
-           
-            if (Form1.pattern.Contains(guess))
+
+            if (Form1.pattern[guess]==0)
             {
                 greenButton.BackColor = Color.White;
                 Refresh();
-                Thread.Sleep(1000);
+                Thread.Sleep(200);
                 greenButton.BackColor = Color.ForestGreen;
+                Refresh();
+                Thread.Sleep(1000);
 
                 guess++;
                 if (guess == Form1.pattern.Count())
@@ -132,16 +147,73 @@ namespace SimonSays
 
         private void redButton_Click(object sender, EventArgs e)
         {
+            if (Form1.pattern[guess]==2)
+            {
+                redButton.BackColor = Color.White;
+                Refresh();
+                Thread.Sleep(200);
+                redButton.BackColor = Color.DarkRed;
+                Refresh();
+                Thread.Sleep(1000);
+
+                guess++;
+                if (guess == Form1.pattern.Count())
+                {
+                    ComputerTurn();
+                }
+            }
+            else
+            {
+                GameOver();
+            }
 
         }
 
         private void blueButton_Click(object sender, EventArgs e)
         {
+            if (Form1.pattern[guess]==1)
+            {
+                blueButton.BackColor = Color.White;
+                Refresh();
+                Thread.Sleep(200);
+                blueButton.BackColor = Color.DarkBlue;
+                Refresh();
+                Thread.Sleep(1000);
+
+                guess++;
+                if (guess == Form1.pattern.Count())
+                {
+                    ComputerTurn();
+                }
+            }
+            else
+            {
+                GameOver();
+            }
 
         }
 
         private void yellowButton_Click(object sender, EventArgs e)
         {
+            if (Form1.pattern[guess]==3)
+            {
+                yellowButton.BackColor = Color.White;
+                Refresh();
+                Thread.Sleep(200);
+                yellowButton.BackColor = Color.Goldenrod;
+                Refresh();
+                Thread.Sleep(1000);
+
+                guess ++;
+                if (guess == Form1.pattern.Count())
+                {
+                    ComputerTurn();
+                }
+            }
+            else
+            {
+                GameOver();
+            }
 
         }
     }
