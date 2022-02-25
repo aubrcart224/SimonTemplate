@@ -6,14 +6,21 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Media;
 
 namespace SimonSays
 {
     public partial class MenuScreen : UserControl
     {
+        // menu sound 
+        SoundPlayer menuPlayer = new SoundPlayer(Properties.Resources.red);
+        
+
+
         public MenuScreen()
         {
             InitializeComponent();
+            
         }
 
         private void newButton_Click(object sender, EventArgs e)

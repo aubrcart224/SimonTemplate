@@ -36,7 +36,7 @@ namespace SimonSays
 
             {
 
-                Form f; // will either be the sender or parent of sender 
+                Form f; 
 
 
 
@@ -44,7 +44,7 @@ namespace SimonSays
 
                 {
 
-                    f = (Form)sender;                          //f is sender 
+                    f = (Form)sender;                        
 
                 }
 
@@ -52,17 +52,14 @@ namespace SimonSays
 
                 {
 
-                    UserControl current = (UserControl)sender;  //create UserControl from sender 
+                    UserControl current = (UserControl)sender;   
 
-                    f = current.FindForm();                     //find Form UserControl is on 
+                    f = current.FindForm();                     
 
-                    f.Controls.Remove(current);                 //remove current UserControl 
+                    f.Controls.Remove(current);                 
 
                 }
 
-
-
-                // add the new UserControl to the middle of the screen and focus on it 
 
                 next.Location = new Point((f.ClientSize.Width - next.Width) / 2,
 
