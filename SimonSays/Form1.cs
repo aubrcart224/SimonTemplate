@@ -21,16 +21,17 @@ namespace SimonSays
         public Form1()
         {
             InitializeComponent();
+
+            //menu screen launch 
             ChangeScreen(this, new MenuScreen());
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //TODO: Launch MenuScreen
-
 
         }
 
+        //change screen method 
         public static void ChangeScreen(object sender, UserControl next)
         {
 

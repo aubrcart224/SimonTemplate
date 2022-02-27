@@ -16,8 +16,7 @@ namespace SimonSays
     {
         //TODO: create guess variable to track what part of the pattern the user is at
 
-   
-        // varibales 
+        //  guess and number varibales 
         int guess = 0;
         int  number = 0;
 
@@ -27,20 +26,6 @@ namespace SimonSays
         SoundPlayer bluePlayer = new SoundPlayer(Properties.Resources.blue);
         SoundPlayer yellowPlayer = new SoundPlayer(Properties.Resources.yellow);
 
-        //button change 
-        //GraphicsPath circlePath = new GraphicsPath();
-        //circlePath.AddElilipse(5,5,90,90);
-        //Region greenButtonRegion = new Region(circlepath);
-        
-        //Matrix transfromMatrix = new Matrix();
-        //transformMatrix.RotateAt(90, new PointF(25, 25)); 
-
-        //buttonRegion.Transform(transformMatrix); 
-
-        //rightButton.Region = buttonRegion; 
-
-
-
 
         public GameScreen()
         {
@@ -49,15 +34,51 @@ namespace SimonSays
 
         private void GameScreen_Load(object sender, EventArgs e)
         {
+            //change button shape
+
+
+            GraphicsPath outerPath = new GraphicsPath();
+            outerPath.AddEllipse(5, 5, 220, 220); //5 pixels in because later 5 pixels will be taken off each edge
+
+            //create a region out of the full circle
+            Region buttonRegion = new Region(outerPath);
+
+            buttonRegion.Exclude(new Rectangle(0, 0, 110, 5));   //remove top line
+            buttonRegion.Exclude(new Rectangle(0, 105, 110, 5)); //remove bottom line
+            buttonRegion.Exclude(new Rectangle(0, 0, 5, 110));   //remove left line
+            buttonRegion.Exclude(new Rectangle(105, 0, 5, 110)); //remove right line
+
+            //remove inner circle from button
+            GraphicsPath innerPath = new GraphicsPath();
+            innerPath.AddEllipse(70, 70, 90, 90);
+            buttonRegion.Exclude(innerPath);
+
+            //apply region to red button
+            greenButton.Region = buttonRegion;
+
+            //rotate the orientation of the screen by 90 degrees
+            Matrix transformMatrix = new Matrix();
+            transformMatrix.RotateAt(90, new PointF(55, 55));
+
+            //apply rotation to button region and apply region to red button    
+            buttonRegion.Transform(transformMatrix);
+            redButton.Region = buttonRegion;
+
+            //apply rotation to button region and apply region to blue button 
+            buttonRegion.Transform(transformMatrix);
+            blueButton.Region = buttonRegion;
+
+            //apply rotation to button region and apply region to yellow button 
+            buttonRegion.Transform(transformMatrix);
+            yellowButton.Region = buttonRegion;
+
+
+
             //TODO: clear the pattern list from form1, refresh, pause for a bit, and run ComputerTurn()
             Form1.pattern.Clear();
             Refresh();
             Thread.Sleep(1000);
             ComputerTurn();
-
-
-            //button change 
-
 
         }
 
@@ -77,10 +98,10 @@ namespace SimonSays
                     greenButton.BackColor= Color.White;
                     greenPlayer.Play();
                     Refresh();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     greenButton.BackColor = Color.ForestGreen;
                     Refresh();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
 
 
                 }
@@ -89,30 +110,30 @@ namespace SimonSays
                     blueButton.BackColor = Color.White;
                     bluePlayer.Play();
                     Refresh();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     blueButton.BackColor = Color.DarkBlue;
                     Refresh();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                 }
                 else if (Form1.pattern[i] == 2)
                 {
                     redButton.BackColor = Color.White;
                     redPlayer.Play();
                     Refresh();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     redButton.BackColor =Color.DarkRed;
                     Refresh();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                 }
                 else if (Form1.pattern[i] == 3)
                 {
                     yellowButton.BackColor= Color.White;
                     yellowPlayer.Play();
                     Refresh();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     yellowButton.BackColor = Color.Goldenrod;
                     Refresh();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                 }
                 
 
@@ -152,7 +173,7 @@ namespace SimonSays
                 Thread.Sleep(200);
                 greenButton.BackColor = Color.ForestGreen;
                 Refresh();
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
 
                 guess++;
                 if (guess == Form1.pattern.Count())
@@ -179,7 +200,7 @@ namespace SimonSays
                 Thread.Sleep(200);
                 redButton.BackColor = Color.DarkRed;
                 Refresh();
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
 
                 guess++;
                 if (guess == Form1.pattern.Count())
@@ -204,7 +225,7 @@ namespace SimonSays
                 Thread.Sleep(200);
                 blueButton.BackColor = Color.DarkBlue;
                 Refresh();
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
 
                 guess++;
                 if (guess == Form1.pattern.Count())
@@ -229,7 +250,7 @@ namespace SimonSays
                 Thread.Sleep(200);
                 yellowButton.BackColor = Color.Goldenrod;
                 Refresh();
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
 
                 guess ++;
                 if (guess == Form1.pattern.Count())

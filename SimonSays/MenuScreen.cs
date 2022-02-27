@@ -13,7 +13,8 @@ namespace SimonSays
     public partial class MenuScreen : UserControl
     {
         // menu sound 
-        SoundPlayer menuPlayer = new SoundPlayer(Properties.Resources.red);
+        //SoundPlayer menuPlayer = new SoundPlayer(Properties.Resources.red);
+        //didnt end up doing this do to large file size 
         
 
 
@@ -27,8 +28,6 @@ namespace SimonSays
         {
             //TODO: remove this screen and start the GameScreen
             Form1.ChangeScreen(this, new GameScreen());
-
-
 
         }
 
